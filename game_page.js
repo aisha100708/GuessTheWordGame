@@ -1,0 +1,33 @@
+var player1name = localStorage.getItem("player1name");
+var player2name = localStorage.getItem("player2name");
+var player1score = 0;
+var player2score = 0;
+document.getElementById("player1_name").innerHTML = player1name + " : ";
+document.getElementById("player2_name").innerHTML = player2name + " : ";
+document.getElementById("player1_score").innerHTML = player1score;
+document.getElementById("player2_score").innerHTML = player2score;
+document.getElementById("player_question").innerHTML = "Question Turn: " + player1name;
+document.getElementById("player_answer").innerHTML = "Answer Turn: " + player2name;
+function generateQuestion() {
+    word = document.getElementById("word").value;
+    lowerCase_word = word.toLowerCase();
+    console.log(lowerCase_word);
+    charAt1 = lowerCase_word.charAt(1);
+    charAt2 = lowerCase_word.charAt(Math.floor(lowerCase_word.length / 2));
+    charAt3 = lowerCase_word.charAt(lowerCase_word.length - 1);
+    charAt4 = lowerCase_word.charAt(Math.floor(Math.random()* lowerCase_word.length));
+    console.log(charAt1);
+    console.log(charAt2);
+    console.log(charAt3);
+    console.log(charAt4);
+    replace_charAt1 = lowerCase_word.replace(charAt1, "_");
+    replace_charAt2 = replace_charAt1.replace(charAt2, "_");
+    replace_charAt3 = replace_charAt2.replace(charAt3, "_");
+    replace_charAt4 = replace_charAt3.replace(charAt4, "_");
+    console.log(replace_charAt4);
+    question_tag = "<h4 id='word_display'> Question: " + replace_charAt4 + "</h4> <br>";
+    answer_tag = "Answer: <input type='text' id='answer_check'> <br>";
+    check_button = "<br> <button class='btn btn-info' onclick='check_answer()'> Check </button>";
+    document.getElementById("output").innerHTML = question_tag + answer_tag + check_button;
+    document.getElementById("word").value = "";
+}
