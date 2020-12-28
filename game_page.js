@@ -2,6 +2,8 @@ var player1name = localStorage.getItem("player1name");
 var player2name = localStorage.getItem("player2name");
 var player1score = 0;
 var player2score = 0;
+var player_question = "player1";
+var player_answer = "player2";
 document.getElementById("player1_name").innerHTML = player1name + " : ";
 document.getElementById("player2_name").innerHTML = player2name + " : ";
 document.getElementById("player1_score").innerHTML = player1score;
@@ -30,4 +32,46 @@ function generateQuestion() {
     check_button = "<br> <button class='btn btn-info' onclick='check_answer()'> Check </button>";
     document.getElementById("output").innerHTML = question_tag + answer_tag + check_button;
     document.getElementById("word").value = "";
+}
+function check_answer() {
+    get_answer = document.getElementById("answer_check").value;
+    lowerCase_answer = get_answer.toLowerCase();
+    console.log(lowerCase_answer);
+    if (lowerCase_answer == lowerCase_word) {
+        if (player_answer == "player1") {
+            player1score = player1score + 1;
+            document.getElementById("player1_score").innerHTML = player1score;
+        }
+        else if (player_answer == "player2") {
+            player2score = player2score + 1;
+            document.getElementById("player2_score").innerHTML = player2score;
+        }
+    }
+    else {
+        if (player_answer == "player1") {
+            player1score = player1score - 1;
+            document.getElementById("player1_score").innerHTML = player1score;
+        }
+        else if (player_answer == "player2") {
+            player2score = player2score - 1;
+            document.getElementById("player2_score").innerHTML = player2score;
+        }
+    }
+    if (player_question == "player1") {
+        player_question = "player2";
+        document.getElementById("player_question").innerHTML = "Question Turn: " + player2name;
+    }
+    else {
+        player_question = "player1";
+        document.getElementById("player_question").innerHTML = "Question Turn: " + player1name;
+    }
+    if (player_answer == "player2") {
+        player_answer = "player1";
+        document.getElementById("player_answer").innerHTML = "Answer Turn: " + player1name;
+    }
+    else {
+        player_answer = "player2";
+        document.getElementById("player_answer").innerHTML = "Answer Turn: " + player2name;
+    }
+    document.getElementById("output").innerHTML = "";
 }
